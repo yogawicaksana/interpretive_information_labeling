@@ -12,7 +12,7 @@
 ## Data Pre-processing
 
 - The first data processing step simply removes any leading and trailing
-character in the q, r, q’, and r’ features. This step is important in order to make
+character in the `q`, `r`, `q’`, and `r’` features. This step is important in order to make
 the model really fed by clean data.
 - We do the 50% upsampling for the training data in order to provide more data
 to our model. We have tried another augmentation strategy such as using
@@ -22,21 +22,21 @@ random state for reproducibility.
 - We treat this Interpretive Information Labeling Project as a question answering
 task. Hence, we need to design a system that can do the extraction in order to
 make target labels. There is a slight modification from the traditional question
-answering, since there is s feature, the discussion relationship between r and q.
-In order to do that, we just place the s feature in front of the r feature with
-format “s:r” to become a new r feature.
-- The next step is to do the index extraction both for q and r with respect to q’
-and r’.
-- Our final features to train the model are q, r, q’, r’, q_start, r_start, q_end, and
-r_end. The *_start and *_end features are nothing but the start and end index
+answering, since there is s feature, the discussion relationship between `r` and `q`.
+In order to do that, we just place the `s` feature in front of the `r` feature with
+format “`s:r`” to become a new `r` feature.
+- The next step is to do the index extraction both for `q` and `r` with respect to `q’`
+and `r’`.
+- Our final features to train the model are `q`, `r`, `q’`, `r’`, `q_start`, `r_start`, `q_end`, and
+`r_end`. The `*_start` and `*_end` features are the start and end index
 as mentioned in the previous point.
 - We split the final data with the percentage of 90:10 for the training and
 validation data, respectively. - The next step is tokenizing the data with the help of BertTokenizer. To add the
 tokenized version of start and end positions to the encoded features, we just
-simply use the char_to_token function. If the q or r start position is nothing,
-we just simply treat the q or r start and end position with 0. Finally, we got the
-encoded features with keys of input_ids, token_type_ids, attention_mask,
-q_start, r_start, q_end, and r_end. The final step is just simply transforming
+simply use the char_to_token function. If the `q` or `r` start position is nothing,
+we just simply treat the `q` or `r` start and end position with 0. Finally, we got the
+encoded features with keys of `input_ids`, `token_type_ids`, `attention_mask`,
+`q_start`, `r_start`, `q_end`, and `r_end`. The final step is just simply transforming
 the encoded features to tensor.
 
 ## Model Overview
